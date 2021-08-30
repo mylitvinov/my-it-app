@@ -9,6 +9,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import { Route } from "react-router-dom";
 
+
 const App = (props) => {
   return (
     <div className="app-wrapper">
@@ -26,7 +27,8 @@ const App = (props) => {
         />
         <Route
           path="/profile"
-          render={() => <Profile state={props.state.profilePage} />}
+          render={() => <Profile state={props.state.profilePage} 
+          addPost = {props.addPost} />}
         />
         <Route path="/news" render={() => <News />} />
         <Route path="/music" render={() => <Music />} />
