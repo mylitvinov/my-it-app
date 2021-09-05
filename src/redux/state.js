@@ -1,6 +1,6 @@
-import { rerenderEntireTree } from "../render"
+let rerenderEntireTree = () => {
 
-
+}
 
 let state = {
 
@@ -11,6 +11,7 @@ profilePage: {
     { id: 3, message: "I am living in Saint-Petersburg", likesCount: 73 },
     { id: 4, message: "Moscow is a capital of Russia.", likesCount: 56 },
   ],
+  newPostText: 'Default value Test'
   
  
 },
@@ -39,15 +40,26 @@ sidebar : {
  
 }
 
-export let addPost = (postMessage) => {
+window.state = state
+export const addPost = () => {
   let newPost = {
     id: 5,
-    message: postMessage,
+    message: state.profilePage.newPostText,
     likesCount: 0
   }
 
   state.profilePage.posts.push(newPost)
+  state.profilePage.newPostText = '';
  rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText) => {
+ state.profilePage.newPostText = newText
+ rerenderEntireTree(state)
+}
+
+export const subscribe =(observer)=> {
+  rerenderEntireTree = observer // наблюдатель
 }
 
 export default state
