@@ -24,7 +24,7 @@ const App = (props) => {
           <Route path = '/settings' component={Settings} />  */}
         <Route
           path="/dialogs"
-          render={() => <Dialogs state={props.state.dialogsPage} />}
+          render={() => <Dialogs store = {props.store}  />}
         />
         <Route
           path="/profile"
