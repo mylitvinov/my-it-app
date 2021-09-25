@@ -11,6 +11,7 @@ import { Route } from "react-router-dom";
 import { updateNewPostText } from "./redux/store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 const App = (props) => {
@@ -34,7 +35,7 @@ const App = (props) => {
         />
          <Route
           path="/users"
-          render={() => <Users />}
+          render={() => <UsersContainer />}
         />
 
 

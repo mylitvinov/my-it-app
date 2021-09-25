@@ -1,14 +1,37 @@
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
+const SET_USERS = "SET_USERS";
 
 let initialState = {
   users: [
-    { id: 1,followed:false, fullname: 'Maxim', status: 'OK', location:{city: 'SPB', country:'Russia'} },
-    { id: 2,followed:true, fullname: 'Anna', status: 'WTF', location:{city: 'SPB', country:'Russia'} },
-    { id: 3,followed:false, fullname: 'Sofia', status: 'HI', location:{city: 'Astrakhan', country:'Russia'} },
+
+    /*{
+      id: 1,
+      fotoUrl: '' ,
+      followed: false,
+      fullName: "Maxim",
+      status: "OK",
+      location: { city: "SPB", country: "Russia" },
+    },
+    {
+      id: 2,
+      fotoUrl: '' ,
+      followed: true,
+      fullName: "Anna",
+      status: "WTF",
+      location: { city: "SPB", country: "Russia" },
+    },
+    {
+      id: 3,
+      fotoUrl: '' ,
+      followed: false,
+      fullName: "Sofia",
+      status: "HI",
+      location: { city: "Astrakhan", country: "Russia" },
+    },
+    */
   ],
-  newPostText: "Default value Test",
-};
+ };
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,28 +39,46 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         // users: {...state.users}
-        users: state.users.map(u => {
+        users: state.users.map((u) => {
           if (u.id === action.userId) {
-            return {...u, followed: true}
+            return { ...u, followed: true };
           }
-          return u
-        }
-        )
-      }
+          return u;
+        }),
+      };
 
     case UNFOLLOW:
+      return {
+        ...state,
+        // users: {...state.users}
+        users: state.users.map((u) => {
+          if (u.id === action.userId) {
+            return { ...u, followed: false };
+          }
+          return u;
+        }),
+      };
 
-    default:  return state;
+      case SET_USERS:
+        return {...state, users: [...state.users,...action.users]  };
+    default:
+      return state;
   }
 };
 
-export const followAC = () => ({
+export const followAC = (userId) => ({
   type: FOLLOW,
-  userid
+  userId,
 });
-export const unfollowAC = () => ({
+export const unfollowAC = (userId) => ({
   type: UNFOLLOW,
-  userId
+  userId,
 });
+
+export const setUsersAC = (users) => ({
+  type: SET_USERS,
+  users,
+});
+
 
 export default usersReducer;
